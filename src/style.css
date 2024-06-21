@@ -6,9 +6,10 @@
 :root {
     --header-background-col: rgba(37, 27, 22, 0.5);
     --restaurant-name-col: rgb(241, 226, 209);
-    --tablink-background-col: rgba(37, 27, 22, 1);
+    --tablink-background-col: rgba(37, 27, 22, 0.8);
     --tablink-hover-col: rgba(241, 226, 209, 0.5);
-    --tablink-active-col: rgba(185,151,110, 1);
+    --tablink-active-col: rgba(185,151,110, 0.9);
+    --tablink-font-col: white;
 }
 
 /*---------------------------------*\
@@ -92,18 +93,24 @@ header {
 
 /* Nav bar styling */
 nav {
+    flex: 1;
     display: flex;
     flex-wrap: nowrap;
+    height: 100%;
 }
 .tablink {
     cursor: pointer;
     float: left;
     background-color: var(--tablink-background-col);
-    color: white;
+    color: var(--tablink-font-col);
     border: none;
     outline: none;
-    padding: 10px 25px;
-    font-size: 17px;
+    padding: 10px 20px;
+    height: 100%;
+    flex: 1;
+    font-size: 20px;
+    font-family: 'NexaRustSansBlack', Helvetica, sans-serif;
+    font-weight: 300;
 }
 
 .tablink:hover {

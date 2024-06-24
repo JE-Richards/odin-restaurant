@@ -10,6 +10,8 @@
     --tablink-hover-col: rgba(241, 226, 209, 0.5);
     --tablink-active-col: rgba(185,151,110, 0.9);
     --tablink-font-col: white;
+    --about-and-menu-text-col: rgb(241, 226, 209);
+    --about-and-menu-background-col: rgba(37, 27, 22, 0.5);
 }
 
 /*---------------------------------*\
@@ -49,7 +51,8 @@
 body {
     display: grid;
     grid-template-rows: max-content 1fr;
-    height: 100vh;
+    height: 100%;
+    width: 100%;
     background-image: url('./assets/img/anastasiia-chepinska-lcfH0p6emhw-unsplash.jpg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -122,7 +125,7 @@ nav {
 |          Content  Styles          |
 |                                   |
 \*---------------------------------*/
-#content, .body-logo {
+#content, .body-logo, .about, article {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -150,4 +153,46 @@ nav {
 .body-logo > h2 {
     font-family: 'RedVelvet', Helvetica, sans-serif;
     font-size: 36px;
+}
+
+article {
+    gap: 10px;
+}
+
+.about, .menu {
+    color: var(--about-and-menu-text-col);
+    font-family: Helvetica, sans-serif;
+    font-size: 16px;
+    background-color: var(--about-and-menu-background-col);
+    padding: 50px;
+    gap: 10px;
+}
+
+.about > h1 {
+    font-family: 'NexaRustSansBlack', Helvetica, sans-serif;
+    font-size: 50px;
+}
+
+.about article h2 {
+    font-family: 'NexaRustSansBlack', Helvetica, sans-serif;
+    font-size: 36px;
+}
+
+article p {
+    max-inline-size: 66ch;
+    line-height: 1.5em;
+}
+
+.about hr {
+    width: 100%
+}
+
+table {
+    border-collapse: separate;
+    letter-spacing: 1px;
+    border-spacing: 20px 5px;
+}
+
+td {
+    text-align: start;
 }

@@ -159,7 +159,8 @@ function populateMenuPage() {
     // create a title and description section
     const menuTitle = document.createElement('h1');
     menuTitle.innerHTML = "Menu";
-    
+    menuDiv.appendChild(menuTitle);
+
     // create articles for content
     const articleList = [
         "menuDescription",
@@ -210,7 +211,7 @@ function populateMenuPage() {
         desc.innerHTML = item['description'];
 
         const prices = document.createElement('p');
-        if (item['itemType'] === "drink") {
+        if (item['itemType'] === "drinks") {
             prices.innerHTML = `<b>S:</b> ${item['priceDrinkSmall']}&emsp;<b>M:</b> ${item['priceDrinkMed']}&emsp;<b>L:</b> ${item['priceDrinkLarge']}`
         }
         else {
@@ -222,7 +223,7 @@ function populateMenuPage() {
             itemDiv.appendChild(itemElements[i]);
         }
 
-        if (item['itemType'] === "drink") {
+        if (item['itemType'] === "drinks") {
             drinksDOMElements.push(itemDiv);
         }
         else {
@@ -248,7 +249,7 @@ function populateMenuPage() {
 
     // sort out food section of the page
     const foodMenuTitleDiv = document.createElement('div');
-    foodMenuTitleDiv.setAttribute('id', "foodMenuTitle");
+    foodMenuTitleDiv.setAttribute('id', "menuFoodTitle");
     const foodMenuTitle = document.createElement('h2');
     foodMenuTitle.innerHTML = "Pastries";
     foodMenuTitleDiv.appendChild(foodMenuTitle);
@@ -264,11 +265,16 @@ function populateMenuPage() {
     const offersPara = document.createElement('p');
     offersPara.innerHTML = "Before 10am, buy any coffee and get £0.50 off any pastry.";
 
-    articles['offers'].appendChild(offersTitle, offersPara);
+    articles['offers'].appendChild(offersTitle);
+    articles['offers'].appendChild(offersPara);
 
     for (let i=0; i < articleList.length; i++) {
-        contentDiv.appendChild(articles[articleList[i]]);
+        menuDiv.appendChild(articles[articleList[i]]);
     }
+
+    contentDiv.appendChild(menuDiv);
+
+    console.log(data);
 }
 
 export { populateHomePage, populateAboutPage, populateMenuPage };

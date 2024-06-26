@@ -1,4 +1,6 @@
 import svgLogo from "./assets/img/coffee-beans-left-svgrepo-com.svg";
+import coffeePortafilters from "./assets/img/nathan-dumlao-Y3AqmbmtLQI-unsplash.jpg";
+import data from "./assets/data/menu-items.csv";
 
 function populateHomePage() {
     const contentDiv = document.getElementById('content');
@@ -56,7 +58,7 @@ function populateAboutPage() {
         descParaThree
     ]
 
-    for (i=0; i < descContent.length; i++) {
+    for (let i=0; i < descContent.length; i++) {
         description.appendChild(descContent[i]);
     }
 
@@ -89,7 +91,7 @@ function populateAboutPage() {
         "06:00 - 18:00",
     ]
 
-    for (i = 0; i < days.length; i++) {
+    for (let i = 0; i < days.length; i++) {
         let row = timeTable.insertRow(i);
         let cellOne = row.insertCell(0);
         cellOne.classList.add('days');
@@ -103,8 +105,8 @@ function populateAboutPage() {
         timeTable
     ]
 
-    for (i=0; i < timeTableContent.length; i++) {
-        timeTable.appendChild(timeTableContent[i]);
+    for (let i=0; i < timeTableContent.length; i++) {
+        openingTimes.appendChild(timeTableContent[i]);
     }
 
     // create content for contact us section
@@ -117,13 +119,13 @@ function populateAboutPage() {
     emailPara.innerHTML = "<b>Email:</b> arealemail@dailygrindcoffee.com";
     phonePara.innerHTML = "<b>Phone:</b> 01234567890";
 
-    contactContent = [
+    const contactContent = [
         contactTitle,
         emailPara,
         phonePara
     ]
 
-    for (i=0; i < contactContent.length; i++) {
+    for (let i=0; i < contactContent.length; i++) {
         contact.appendChild(contactContent[i]);
     }
 
@@ -137,12 +139,136 @@ function populateAboutPage() {
         contact
     ]
 
-    for (i=0; i < aboutContent.length; i++) {
+    for (let i=0; i < aboutContent.length; i++) {
         aboutDiv.appendChild(aboutContent[i]);
     }
 
-    contentDiv.appendChild(aboutContent);
+    contentDiv.appendChild(aboutDiv);
 
 }
 
-export { populateHomePage, populateAboutPage };
+function populateMenuPage() {
+    // clear content div
+    const contentDiv = document.getElementById('content');
+    contentDiv.innerHTML = "";
+
+    // create the content for the menu tab
+    const menuDiv = document.createElement('div');
+    menuDiv.classList.add('menu');
+
+    // create a title and description section
+    const menuTitle = document.createElement('h1');
+    menuTitle.innerHTML = "Menu";
+    
+    // create articles for content
+    const articleList = [
+        "menuDescription",
+        "drinks",
+        "food",
+        "offers"
+    ]
+
+    const articles = {};
+    for (let i=0; i < articleList.length; i++) {
+        articles[articleList[i]] = document.createElement('article');
+        articles[articleList[i]].setAttribute('id', articleList[i]);
+    }
+
+    // create content for Menu description
+    const menuDescPara = document.createElement('p');
+    menuDescPara.innerHTML = "At Daily Grind, our expert baristas take pride in transforming our rich, premium Cuban coffee beans into an excquisite cup of coffee perfection. Our commitment to quality extends beyond our coffee to our freshly baked pastries, crafted daily to complement your favourite brew. Whether you're seeking a robust espresso, velvety latte, or a sweet treat, each visit promises a taste of passion and dedication in every sip and bite.";
+    const menuImg = new Image();
+    menuImg.src = coffeePortafilters;
+    menuImg.alt = "Coffee Portafilters";
+    menuImg.id = "menuImg";
+
+    const menuContent = [
+        menuDescPara, 
+        menuImg
+    ]
+
+    for (let i=0; i < menuContent.length; i++) {
+        articles["menuDescription"].appendChild(menuContent[i]);
+    }
+
+    // create an empty object to store the drink DOM items
+    const drinksDOMElements = [];
+    // create an empty object to store the food DOM items
+    const foodDOMElements = [];
+    // function to create menu DOM items
+    function createMenuItems (item) {
+        const line = document.createElement('hr');
+        // need different options for food and drink because of the different price structure
+        const itemDiv = document.createElement('div');
+        itemDiv.classList.add('drinks');
+        itemDiv.setAttribute('id', item['realName']);
+        
+        const itemHeader = document.createElement('h3');
+        itemHeader.innerHTML = item['menuName'];
+        
+        const desc = document.createElement('p');
+        desc.innerHTML = item['description'];
+
+        const prices = document.createElement('p');
+        if (item['itemType'] === "drink") {
+            prices.innerHTML = `<b>S:</b> ${item['priceDrinkSmall']}&emsp;<b>M:</b> ${item['priceDrinkMed']}&emsp;<b>L:</b> ${item['priceDrinkLarge']}`
+        }
+        else {
+            prices.innerHTML = `${item['priceFood']}`
+        }
+
+        const itemElements = [itemHeader, desc, line, prices]
+        for (let i=0; i < itemElements.length; i++) {
+            itemDiv.appendChild(itemElements[i]);
+        }
+
+        if (item['itemType'] === "drink") {
+            drinksDOMElements.push(itemDiv);
+        }
+        else {
+            foodDOMElements.push(itemDiv);
+        }
+    }
+
+    data.forEach(item => {
+        createMenuItems(item);
+    })
+
+    // sort out the drink section of the page
+    const drinkMenuTitleDiv = document.createElement('div');
+    drinkMenuTitleDiv.setAttribute('id', "menuDrinkTitle");
+    const drinkMenuTitle = document.createElement('h2');
+    drinkMenuTitle.innerHTML = "Drinks";
+    drinkMenuTitleDiv.appendChild(drinkMenuTitle);
+
+    articles['drinks'].appendChild(drinkMenuTitleDiv);
+    drinksDOMElements.forEach(item => {
+        articles['drinks'].appendChild(item);
+    })
+
+    // sort out food section of the page
+    const foodMenuTitleDiv = document.createElement('div');
+    foodMenuTitleDiv.setAttribute('id', "foodMenuTitle");
+    const foodMenuTitle = document.createElement('h2');
+    foodMenuTitle.innerHTML = "Pastries";
+    foodMenuTitleDiv.appendChild(foodMenuTitle);
+
+    articles['food'].appendChild(foodMenuTitleDiv);
+    foodDOMElements.forEach(item => {
+        articles['food'].appendChild(item);
+    })
+
+    // create the elements to go in the offer section
+    const offersTitle = document.createElement('h2');
+    offersTitle.innerHTML = "Offers";
+    const offersPara = document.createElement('p');
+    offersPara.innerHTML = "Before 10am, buy any coffee and get £0.50 off any pastry.";
+
+    articles['offers'].appendChild(offersTitle, offersPara);
+
+    for (let i=0; i < articleList.length; i++) {
+        contentDiv.appendChild(articles[articleList[i]]);
+    }
+}
+
+export { populateHomePage, populateAboutPage, populateMenuPage };

@@ -125,7 +125,7 @@ nav {
 |          Content  Styles          |
 |                                   |
 \*---------------------------------*/
-#content, .body-logo, .about, article {
+#content, .body-logo, .about, .menu, article {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -165,17 +165,22 @@ article {
     font-size: 16px;
     background-color: var(--about-and-menu-background-col);
     padding: 50px;
-    gap: 10px;
+    gap: 20px;
 }
 
-.about > h1 {
+.about h1, .menu h1 {
     font-family: 'NexaRustSansBlack', Helvetica, sans-serif;
     font-size: 50px;
 }
 
-.about article h2 {
+.about article h2, .menu article h2 {
     font-family: 'NexaRustSansBlack', Helvetica, sans-serif;
     font-size: 36px;
+}
+
+.menu article div h3 {
+    font-family: 'NexaRustSansBlack', Helvetica, sans-serif;
+    font-size: 20px;
 }
 
 article p {
@@ -195,4 +200,32 @@ table {
 
 td {
     text-align: start;
+}
+
+#drinks, #food {
+    display: grid;
+    gap: 20px 40px;
+}
+
+#drinks {
+    grid-template: repeat(5, max-content) / repeat(2, 1fr);
+}
+
+#food {
+    grid-template: repeat(5, max-content) / repeat(2, 1fr);
+}
+
+#menuDrinkTitle, #menuFoodTitle {
+    grid-area: 1 / 1 / 2 / 3;
+    display: flex;
+    justify-content: center;
+}
+
+.drinks p, .food p {
+    max-inline-size: 40ch;
+}
+
+#menuImg {
+    height: 250px;
+    width: 375px;
 }

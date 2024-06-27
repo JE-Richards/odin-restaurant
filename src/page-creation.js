@@ -4,7 +4,6 @@ import data from "./assets/data/menu-items.csv";
 
 function populateHomePage() {
     const contentDiv = document.getElementById('content');
-    contentDiv.innerHTML = "";
 
     const bodyLogo = document.createElement('div');
     bodyLogo.classList.add('body-logo');
@@ -28,9 +27,7 @@ function populateHomePage() {
 }
 
 function populateAboutPage() {
-    // clear content div
     const contentDiv = document.getElementById('content');
-    contentDiv.innerHTML = "";
 
     // create the content for the about tab
     const aboutDiv = document.createElement('div');
@@ -148,9 +145,7 @@ function populateAboutPage() {
 }
 
 function populateMenuPage() {
-    // clear content div
     const contentDiv = document.getElementById('content');
-    contentDiv.innerHTML = "";
 
     // create the content for the menu tab
     const menuDiv = document.createElement('div');
@@ -277,4 +272,9 @@ function populateMenuPage() {
     console.log(data);
 }
 
-export { populateHomePage, populateAboutPage, populateMenuPage };
+function clearContent() {
+    const contentDiv = document.getElementById('content');
+    contentDiv.innerHTML = "";
+}
+
+export { populateHomePage, populateAboutPage, populateMenuPage, clearContent };

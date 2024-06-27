@@ -1,4 +1,4 @@
-import { populateHomePage, populateAboutPage, populateMenuPage } from "./page-creation";
+import { populateHomePage, populateAboutPage, populateMenuPage, clearContent } from "./page-creation";
 import './style.css';
 
 function loadPage() {
@@ -6,9 +6,20 @@ function loadPage() {
     const menuBtn = document.getElementById('menuBtn');
     const aboutBtn = document.getElementById('aboutBtn');
 
-    homeBtn.addEventListener('click', populateHomePage);
-    menuBtn.addEventListener('click', populateMenuPage);
-    aboutBtn.addEventListener('click', populateAboutPage);
+    homeBtn.addEventListener('click', () => {
+        clearContent();
+        populateHomePage();
+    });
+
+    menuBtn.addEventListener('click', () => {
+        clearContent();
+        populateMenuPage();
+    });
+
+    aboutBtn.addEventListener('click', () =>{
+        clearContent();
+        populateAboutPage();
+    });
 
     populateHomePage();
 };

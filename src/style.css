@@ -101,10 +101,9 @@ nav {
     flex-wrap: nowrap;
     height: 100%;
 }
-.tablink {
+.tablink, .tablinkActive {
     cursor: pointer;
     float: left;
-    background-color: var(--tablink-background-col);
     color: var(--tablink-font-col);
     border: none;
     outline: none;
@@ -114,6 +113,14 @@ nav {
     font-size: 20px;
     font-family: 'NexaRustSansBlack', Helvetica, sans-serif;
     font-weight: 300;
+}
+
+.tablink {
+    background-color: var(--tablink-background-col);
+}
+
+.tablinkActive {
+    background-color: var(--tablink-active-col);
 }
 
 .tablink:hover {

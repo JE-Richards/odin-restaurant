@@ -2,7 +2,23 @@ import svgLogo from "./assets/img/coffee-beans-left-svgrepo-com.svg";
 import coffeePortafilters from "./assets/img/nathan-dumlao-Y3AqmbmtLQI-unsplash.jpg";
 import data from "./assets/data/menu-items.csv";
 
+function colorActiveTab(tabId) {
+    let btns = document.querySelectorAll('button');
+
+    for (let i=0; i < btns.length; i++) {
+        if (btns[i].id === tabId && btns[i].classList.contains('tablink')) {
+            btns[i].classList.remove('tablink');
+            btns[i].classList.add('tablinkActive');
+        }
+        else if (btns[i].id != tabId && btns[i].classList.contains('tablinkActive')) {
+            btns[i].classList.remove('tablinkActive');
+            btns[i].classList.add('tablink');
+        }
+    }
+}
+
 function populateHomePage() {
+    colorActiveTab('homeBtn');
     const contentDiv = document.getElementById('content');
 
     const bodyLogo = document.createElement('div');
@@ -27,6 +43,7 @@ function populateHomePage() {
 }
 
 function populateAboutPage() {
+    colorActiveTab('aboutBtn');
     const contentDiv = document.getElementById('content');
 
     // create the content for the about tab
@@ -145,6 +162,7 @@ function populateAboutPage() {
 }
 
 function populateMenuPage() {
+    colorActiveTab('menuBtn');
     const contentDiv = document.getElementById('content');
 
     // create the content for the menu tab
@@ -268,8 +286,6 @@ function populateMenuPage() {
     }
 
     contentDiv.appendChild(menuDiv);
-
-    console.log(data);
 }
 
 function clearContent() {
